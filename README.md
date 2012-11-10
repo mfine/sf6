@@ -1,6 +1,6 @@
-# SF6
-
 ![SF6](http://www.3dchem.com/inorganics/SF6.jpg)
+
+# SF6
 
 Simple circuit breaking, rate limiting.
 
