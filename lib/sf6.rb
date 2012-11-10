@@ -1,5 +1,8 @@
 module SF6
 
+  class Unavailable < StandardError
+  end
+
   def self.stamp(data, attr, bucket)
     timestamp = Time.now.to_i / bucket
     data[:counts][attr] = 0 unless data[:timestamps][attr] == timestamp
@@ -15,7 +18,7 @@ module SF6
     if value == 0 || data[:counts][attr] < value
       yield
     else
-      raise(Error::Unavailable, attr)
+      raise(Unavailable, attr)
     end
   end
 
@@ -26,9 +29,9 @@ module SF6
     end
 
     def self.check(attr, value, bucket, &blk)
-      timestamp = stamp(data, attr, bucket)
-      increment(data, attr, timestamp)
-      test(data, attr, value) do
+      timestamp = SF6.stamp(data, attr, bucket)
+      SF6.increment(data, attr, timestamp)
+      SF6.test(data, attr, value) do
         yield
       end
     end
@@ -41,12 +44,12 @@ module SF6
     end
 
     def self.check(attr, value, bucket, &blk)
-      timestamp = stamp(data, attr, bucket)
-      test(data, attr, value) do
+      timestamp = SF6.stamp(data, attr, bucket)
+      SF6.test(data, attr, value) do
         begin
           yield
         rescue => e
-          increment(data, attr, timestamp)
+          SF6.increment(data, attr, timestamp)
           raise
         end
       end
