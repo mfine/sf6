@@ -22,6 +22,11 @@ module SF6
     end
   end
 
+  def self.reset!(data, attr)
+    data[:timestamps][attr] = 0
+    data[:counts][attr] = 0
+  end
+
   module Limiter
 
     def self.data
@@ -34,6 +39,11 @@ module SF6
       SF6.test(data, attr, value) do
         yield
       end
+    end
+
+    def self.reset!(attr)
+      SF6.reset!(data, attr)
+      true
     end
   end
 
@@ -53,6 +63,10 @@ module SF6
           raise
         end
       end
+    end
+
+    def self.reset!(attr)
+      SF6.reset!(data, attr)
     end
   end
 end
