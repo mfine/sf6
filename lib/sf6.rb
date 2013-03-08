@@ -25,7 +25,7 @@ module SF6
   module Limiter
 
     def self.data
-      @data ||= {counts: Hash.new(0), timestamps: Hash.new(0)}
+      @data ||= {:counts => Hash.new(0), :timestamps => Hash.new(0)}
     end
 
     def self.check(attr, value, bucket, &blk)
@@ -40,7 +40,7 @@ module SF6
   module Breaker
 
     def self.data
-      @data ||= {counts: Hash.new(0), timestamps: Hash.new(0)}
+      @data ||= {:counts => Hash.new(0), :timestamps => Hash.new(0)}
     end
 
     def self.check(attr, value, bucket, &blk)
