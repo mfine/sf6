@@ -43,7 +43,6 @@ module SF6
 
     def self.reset!(attr)
       SF6.reset!(data, attr)
-      true
     end
   end
 
