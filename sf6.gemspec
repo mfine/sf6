@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = "sf6"
   s.email = "mark.fine@gmail.com"
-  s.version = "0.1"
+  s.version = "0.3"
   s.description = "Circuit breaker, Rate limiter."
   s.summary = "breaker"
   s.authors = ["Mark Fine"]
